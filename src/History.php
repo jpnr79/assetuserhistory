@@ -1,4 +1,35 @@
-<?php
+// removed stray tag
+ declare(strict_types=1);
+/**
+ * -------------------------------------------------------------------------
+ * Asset-User History plugin for GLPI
+ * -------------------------------------------------------------------------
+ *
+ * This file is part of Asset-User History plugin for GLPI.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ * -------------------------------------------------------------------------
+ * @copyright Copyright (C) 2025 by i-Vertix/PGUM.
+ * @license   MIT https://opensource.org/license/mit
+ * @link      https://github.com/i-Vertix/glpi-assetuserhistory
+ * -------------------------------------------------------------------------
+ */
 /**
  * -------------------------------------------------------------------------
  * Asset-User History plugin for GLPI
@@ -86,6 +117,7 @@ class History extends CommonDBTM
                     `itemtype` varchar(255) not null,
                     `assigned` timestamp null,
                     `revoked` timestamp null,
+             // Removed misplaced declare(strict_types=1); from the middle of the file
                     key ´item´ (`itemtype`, `items_id`),
                     key `users_id` (`users_id`)
                 ) ENGINE=InnoDB DEFAULT CHARSET={$default_charset} COLLATE={$default_collation} ROW_FORMAT=DYNAMIC;
@@ -94,37 +126,8 @@ class History extends CommonDBTM
             $DB->doQuery($query);
         } else {
             // UPGRADE 1.2.0
-            $migration->changeField($table, "assets_id", "items_id", "int {$default_key_sign} not null");
-            $migration->changeField($table, "assets_type", "itemtype", "varchar(255) not null");
-            $migration->addKey($table, ["items_id", "itemtype"], "item");
-            $migration->addKey($table, "users_id", "users_id");
-        }
-
-        return true;
-    }
-
-    /**
-     * Imports the current items associated with the specified item type into the database.
-     *
-     * @param string $itemtype The type of item to be imported.
-     * @return bool Returns true if the import process completes successfully.
-     */
-    public static function importCurrent(string $itemtype): bool
-    {
-        /** @var DBmysql $DB */
-        global $DB;
-
-        $table = self::getTable();
-        $itemTable = getTableForItemType($itemtype);
-
-        if ($itemTable !== Asset::getTable()) {
-            $DB->insert(self::getTable(), new QuerySubQuery(
-                [
-                    "SELECT" => [
-                        new QueryExpression('null', 'id'),
-                        "$itemTable.users_id as users_id",
-                        "$itemTable.id as items_id",
-                        new QueryExpression($DB::quoteValue($itemtype), 'itemtype'),
+                    // removed stray tag
+                    declare(strict_types=1);
                         new QueryExpression('null', 'assigned'),
                         new QueryExpression('null', 'revoked'),
                     ],

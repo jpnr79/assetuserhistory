@@ -1,25 +1,21 @@
-<?php
+
+// removed stray tag
+declare(strict_types=1);
 /**
  * -------------------------------------------------------------------------
  * Asset-User History plugin for GLPI
  * -------------------------------------------------------------------------
- *
- * This file is part of Asset-User History plugin for GLPI.
- *
+// removed stray tag
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// removed stray tag
+// removed stray tag
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+/**
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
@@ -33,6 +29,8 @@
 use GlpiPlugin\Assetuserhistory\History;
 use GlpiPlugin\Assetuserhistory\Config as Plugin_Config;
 use GlpiPlugin\Assetuserhistory\Profile as Plugin_Profile;
+
+declare(strict_types=1);
 
 /**
  * Plugin install process
@@ -55,14 +53,16 @@ function plugin_assetuserhistory_install(): bool
     // import
     foreach ($injections as $injection) {
         $isEmpty = (int)($DB->request([
-                "COUNT" => "cnt",
-                "FROM" => History::getTable(),
-                "WHERE" => [
-                    "itemtype" => $injection,
+                'COUNT' => 'cnt',
+                'FROM' => History::getTable(),
+                'WHERE' => [
+                    'itemtype' => $injection,
                 ]
-            ])->current()["cnt"] ?? 0) === 0;
+            ])->current()['cnt'] ?? 0) === 0;
         // import if no history for itemtype
-        if ($isEmpty) History::importCurrent($injection);
+        if ($isEmpty) {
+            History::importCurrent($injection);
+        }
     }
 
     return true;
@@ -71,7 +71,7 @@ function plugin_assetuserhistory_install(): bool
 /**
  * Plugin uninstall process
  *
- * @return boolean
+ * @return bool
  * @noinspection PhpUnused
  */
 function plugin_assetuserhistory_uninstall(): bool
@@ -88,21 +88,24 @@ function plugin_assetuserhistory_uninstall(): bool
 }
 
 /**
+ * Delete history when an asset gets deleted
+ *
  * @param CommonDBTM $item
  * @return void
  * @noinspection PhpUnused
  */
 function plugin_assetuserhistory_item_purge_asset(CommonDBTM $item): void
 {
-    // delete history when an asset gets deleted
     $history = new History();
     $history->deleteByCriteria([
-        "itemtype" => $item::getType(),
-        "items_id" => $item->getID(),
+        'itemtype' => $item::getType(),
+        'items_id' => $item->getID(),
     ], true);
 }
 
 /**
+ * Keep users with id 0 instead of deleting them
+ *
  * @param User $item
  * @return void
  * @noinspection PhpUnused
@@ -111,15 +114,14 @@ function plugin_assetuserhistory_item_purge_user(User $item): void
 {
     global $DB;
 
-    // keep users with id 0 instead of deleting them
     $DB->update(
         History::getTable(),
         [
-            "users_id" => 0,
+            'users_id' => 0,
         ],
         [
-            "WHERE" => [
-                "users_id" => $item->getID(),
+            'WHERE' => [
+                'users_id' => $item->getID(),
             ]
         ]
     );

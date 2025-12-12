@@ -1,10 +1,16 @@
-<?php
+declare(strict_types=1);
+// removed stray tag
 /**
  * -------------------------------------------------------------------------
  * Asset-User History plugin for GLPI
  * -------------------------------------------------------------------------
- *
- * This file is part of Asset-User History plugin for GLPI.
+// removed stray tag
+ declare(strict_types=1);
+ /**
+  * -------------------------------------------------------------------------
+  * Asset-User History plugin for GLPI
+  * -------------------------------------------------------------------------
+  */
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -50,6 +56,7 @@ class Config extends Glpi_Config
 
     private const CONFIG_CONTEXT = "plugin:assetuserhistory";
     private const DEFAULT_INJECTIONS = ['Computer', 'Monitor', 'NetworkEquipment', 'Peripheral', 'Phone', 'Printer'];
+declare(strict_types=1);
 
 
     public static function getTypeName($nb = 0)
@@ -81,6 +88,9 @@ class Config extends Glpi_Config
      */
     public static function installTrigger(string $itemtype): bool
     {
+        // removed stray tag
+        // removed stray tag
+        declare(strict_types=1);
         /** @var DBmysql $DB */
         global $DB;
 

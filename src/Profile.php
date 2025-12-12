@@ -1,4 +1,5 @@
-<?php
+// removed stray tag
+declare(strict_types=1);
 /**
  * -------------------------------------------------------------------------
  * Asset-User History plugin for GLPI
@@ -37,7 +38,8 @@ use CommonGLPI;
 use Glpi\Application\View\TemplateRenderer;
 use Migration;
 use Profile as GlpiProfile;
-use ProfileRight;
+declare(strict_types=1);
+// removed stray tag
 use User;
 
 class Profile extends GlpiProfile
