@@ -1,9 +1,31 @@
 <?php
 // Fallback stubs for static analysis only
-if (!class_exists('CommonDBTM')) { class CommonDBTM { public static function getType() { return ''; } public function getID() { return 0; } public function canViewItem() { return true; } public static function canView() { return true; } public function getName() { return ''; } public function find($a) { return []; } public function getFromResultSet($a) {} } }
-if (!class_exists('User')) { class User extends CommonDBTM { public static function getTable() { return 'glpi_users'; } public static function getFormURLWithID($id) { return ''; } } }
-if (!class_exists('Session')) { class Session { public static function haveRight($a, $b) { return true; } public static function addToNavigateListItems($a, $b) {} } }
-if (!class_exists('Html')) { class Html { public static function convDateTime($a, $b = null, $c = null) { return ''; } } }
+if (!class_exists('CommonDBTM')) {
+    class CommonDBTM {
+        public static function getType() { return ''; }
+        public function getID() { return 0; }
+        public function canViewItem() { return true; }
+        public static function canView() { return true; }
+        public function getName() { return ''; }
+        public function find($a) { return []; }
+        public function getFromResultSet($a) {}
+    }
+}
+if (!class_exists('User')) {
+    class User extends CommonDBTM {
+        public static function getTable() { return 'glpi_users'; }
+        public static function getFormURLWithID($id) { return ''; }
+    }
+}
+if (!class_exists('Session')) {
+    class Session {
+        public static function haveRight($a, $b) { return true; }
+        public static function addToNavigateListItems($a, $b) {}
+    }
+}
+if (!class_exists('Html')) {
+    class Html { public static function convDateTime($a, $b = null, $c = null) { return ''; } }
+}
 if (!class_exists('Glpi\\Application\\View\\TemplateRenderer')) { class TemplateRenderer { public static function getInstance() { return new self(); } public function display($a, $b) {} } }
 if (!function_exists('__')) { function __($a, $b = null) { return $a; } }
 if (!function_exists('__s')) { function __s($a, $b = null) { return $a; } }
