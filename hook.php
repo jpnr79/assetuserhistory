@@ -8,6 +8,22 @@ if (!defined('GLPI_ROOT')) {
 use GlpiPlugin\Assetuserhistory\History;
 
 /**
+ * Install the plugin
+ */
+function plugin_assetuserhistory_install(): bool
+{
+    return true;
+}
+
+/**
+ * Uninstall the plugin
+ */
+function plugin_assetuserhistory_uninstall(): bool
+{
+    return true;
+}
+
+/**
  * Delete history when an asset gets deleted
  * @param CommonDBTM $item
  */
