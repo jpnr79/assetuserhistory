@@ -377,7 +377,11 @@ declare(strict_types=1);
         $current_config = Glpi_Config::getConfigurationValues(self::CONFIG_CONTEXT);
         try {
             return json_decode($current_config["inject_item_type"] ?? "[]");
-        } catch (\Exception) {
+        } catch (\Exception $e) {
+            Toolbox::logInFile('assetuserhistory', sprintf(
+                'ERROR [%s:%s] Exception: %s, user=%s',
+                __FILE__, __FUNCTION__, $e->getMessage(), $_SESSION['glpiname'] ?? 'unknown'
+            ));
             return [];
         }
     }
